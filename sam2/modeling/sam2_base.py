@@ -586,7 +586,6 @@ class SAM2Base(torch.nn.Module):
                 else:
                     maskmem_enc = prev["maskmem_pos_enc"][-1]
 
-
                 maskmem_enc = maskmem_enc.flatten(2).permute(2, 0, 1)
                 # Temporal positional encoding
                 maskmem_enc = (
