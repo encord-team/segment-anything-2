@@ -84,32 +84,7 @@ CUDA_ERROR_MSG = (
 
 
 def get_extensions():
-    if not BUILD_CUDA:
-        return []
-
-    try:
-        from torch.utils.cpp_extension import CUDAExtension
-
-        srcs = ["sam2/csrc/connected_components.cu"]
-        compile_args = {
-            "cxx": [],
-            "nvcc": [
-                "-DCUDA_HAS_FP16=1",
-                "-D__CUDA_NO_HALF_OPERATORS__",
-                "-D__CUDA_NO_HALF_CONVERSIONS__",
-                "-D__CUDA_NO_HALF2_OPERATORS__",
-            ],
-        }
-        ext_modules = [CUDAExtension("sam2._C", srcs, extra_compile_args=compile_args)]
-    except Exception as e:
-        if BUILD_ALLOW_ERRORS:
-            print(CUDA_ERROR_MSG.format(e))
-            ext_modules = []
-        else:
-            raise e
-
-    return ext_modules
-
+    return []
 
 try:
     from torch.utils.cpp_extension import BuildExtension
