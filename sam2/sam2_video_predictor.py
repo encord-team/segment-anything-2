@@ -584,6 +584,9 @@ class SAM2VideoPredictor(SAM2Base):
             processing_order = range(start_frame_idx, end_frame_idx + 1)
 
         for frame_idx in tqdm(processing_order, desc="propagate in video"):
+            if inference_state["images"][frame_idx] is None:
+                return
+
             pred_masks_per_obj = [None] * batch_size
             for obj_idx in range(batch_size):
                 obj_output_dict = inference_state["output_dict_per_obj"][obj_idx]
